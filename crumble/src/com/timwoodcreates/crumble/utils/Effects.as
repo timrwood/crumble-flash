@@ -3,6 +3,7 @@
 	import Box2D.Common.Math.b2Vec2;
 	import com.timwoodcreates.crumble.env.Universe;
 	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.display.Stage;
 	import flash.events.KeyboardEvent;
 	import flash.filters.ColorMatrixFilter;
@@ -17,23 +18,15 @@
 	 * @author Tim Wood
 	 */
 	public class Effects {
-		[Embed(source='../assets/map.jpg')]
-		public static const mapC:Class;
-		private var map:Bitmap = new mapC;
+		private var map:Bitmap;
 		
-		[Embed(source='../assets/clouds.jpg')]
-		public static const cloudsC:Class;
-		private var clouds:Bitmap = new cloudsC;
+		private var clouds:Bitmap;
 		private var cloudsX:Number = 0;
 		
-		[Embed(source='../assets/city1.png')]
-		public static const city1C:Class;
-		private var city1:Bitmap = new city1C;
+		private var city1:Bitmap;
 		private var city1X:Number = 0;
 		
-		[Embed(source='../assets/city2.png')]
-		public static const city2C:Class;
-		private var city2:Bitmap = new city2C;
+		private var city2:Bitmap;
 		private var city2X:Number = 0;
 
 		private static const STAGE_WIDTH:int = 800;
@@ -45,7 +38,7 @@
 		private var rate:Number = .95;
 		private var shakePos:b2Vec2 = new b2Vec2();
 		private var fadeoutMatrix:ColorMatrixFilter;
-		private var displaceMap:DisplacementMapFilter = new DisplacementMapFilter(map.bitmapData, null, 1, 2, 30, 30, 'wrap', 0, 0);
+		private var displaceMap:DisplacementMapFilter;
 		private var positionHero:Matrix = new Matrix(1, 0, 0, 1, STAGE_WIDTH / 2, STAGE_HEIGHT / 2);
 		private var targetX:Number = STAGE_WIDTH / 2;
 		private var targetY:Number = STAGE_HEIGHT / 2;
@@ -53,6 +46,12 @@
 		private var showRealEffects:Boolean = true;
 
 		public function Effects(stage:Stage){
+			map = new Bitmap(new mapC());
+			clouds = new Bitmap(new cloudsC());
+			city1 = new Bitmap(new city1C());
+			city2 = new Bitmap(new city2C());
+
+			displaceMap = new DisplacementMapFilter(map.bitmapData, null, 1, 2, 30, 30, 'wrap', 0, 0)
 			//stage.addChildAt(clouds, 0);
 			//stage.addChildAt(city2, 1);
 			//stage.addChildAt(city1, 2);

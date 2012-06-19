@@ -12,9 +12,7 @@ package com.timwoodcreates.crumble.utils
 	 */
 	public class Architect
 	{
-		[Embed(source='../assets/wall.png')]
-		public static const wallC:Class;
-		private var wall:Bitmap = new wallC;
+		private var wall:Bitmap;
 		
 		private static const SCALE:int = Universe.RATIO;
 		
@@ -32,7 +30,7 @@ package com.timwoodcreates.crumble.utils
 		
 		public function Architect() 
 		{
-			
+			wall = new Bitmap(new wallC());
 		}
 		
 		public function buildWall(sizeInit:b2Vec2):Sprite

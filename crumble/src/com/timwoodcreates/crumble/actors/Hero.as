@@ -81,6 +81,7 @@
 					pressSpace = true;
 					break;
 				case Keyboard.SPACE:
+					tract('should kill');
 					this.kill();
 					break;
 			}
